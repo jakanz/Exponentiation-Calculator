@@ -7,13 +7,13 @@ while True:
 
     while usableBase == False: 
         try:
-            base = int(input("Input a base: ")); usableBase = True
+            base = float(input("Input a base: ")); usableBase = True
         except ValueError:
             print("Error code 1: illegal input - contains unconvertable characters")
     while usableTime == False:
         try:
-            exponentTimes = int(input("Input the number of times you would like to exponentiate your base: ")); usableTime = True
-            if exponentTimes <= 0: print("Error code 2: illegal input - exponent cannot be negative or zero"); usableTime = False
+            exponentTimes = float(input("Input a maximum exponentation: ")); usableTime = True
+            if exponentTimes == 0: print("Error code 2: illegal input - exponent cannot be zero"); usableTime = False
         except ValueError:
             print("Error code 1: illegal input - contains unconvertable characters")
 
@@ -21,11 +21,18 @@ while True:
     def exponentiate(base,exponent):
         return base ** exponent
 
-    exponent = 1
-    while exponent <= exponentTimes:
-        print(exponentiate(base,exponent), " [", exponent, "]")
-        exponent += 1
-        sleep(0.2)
+    if exponentTimes > 0:
+        exponent = 1
+        while exponent <= exponentTimes:
+            print(int(exponentiate(base,exponent)), " [", exponent, "]")
+            exponent += 1
+            sleep(0.2)
+    else:
+        exponent = -1
+        while exponent >= exponentTimes:
+            print(exponentiate(base,exponent), " [", exponent, "]")
+            exponent -= 1
+            sleep(0.2)
 
     sleep(0.7); print("")
     while retryConfirmed == False:
